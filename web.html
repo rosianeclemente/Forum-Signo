@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signos</title>
+</head>
+
+<body>
+
+    <p><strong>Selecione a data do seu aniversário para ver seu signo: </strong></p>
+
+    <form action="">
+        <label for="aniversario">Aniversário:</label>
+        <input type="date" id="aniversario" name="aniversario">
+        <input type="button" value="Enviar" onclick="TagXML();">
+    </form>
+
+    <p><strong>Signo: </strong></p>
+
+    <text id="signoValue" x="5" y="35" font-family="Verdana" font-size="11" fill="white">
+
+    </text>
+    <br>
+
+    <p><strong>Descrição: </strong></p>
+    <text id="descricaoValue" x="5" y="35" font-family="Verdana" font-size="11" fill="white">
+
+    </text>
+
+
+</body>
+<script>
+
+    TagXML = function () {
+
+        var dados = "<signos>"
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>20/01</dataInicio>"
+        var dados = dados + "<dataFim>18/02</dataFim>"
+        var dados = dados + "<signoNome>Aquario</signoNome>"
+        var dados = dados + "<descricao>Aquário é atencioso e amável.</descricao>"
+        var dados = dados + "</signo>"
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>19/02</dataInicio>"
+        var dados = dados + "<dataFim>20/03</dataFim>"
+        var dados = dados + "<signoNome>Peixes</signoNome>"
+        var dados = dados + "<descricao>Peixes são rebeldes e contrários a tudo.</descricao>"
+        var dados = dados + "</signo>"
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>21/03</dataInicio>"
+        var dados = dados + "<dataFim>19/04</dataFim>"
+        var dados = dados + "<signoNome>Aries</signoNome>"
+        var dados = dados + "<descricao>Áries são bem humorados.</descricao>"
+        var dados = dados + "</signo>"
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>20/04</dataInicio>"
+        var dados = dados + "<dataFim>20/05</dataFim>"
+        var dados = dados + "<signoNome>Touro</signoNome>"
+        var dados = dados + "<descricao>Touros são marrentos.</descricao>"
+        var dados = dados + "</signo>"
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>21/05</dataInicio>"
+        var dados = dados + "<dataFim>21/06</dataFim>"
+        var dados = dados + "<signoNome>gemeos</signoNome>"
+        var dados = dados + "<descricao>Gêmeos são de forte personalidade.</descricao>"
+        var dados = dados + "</signo>"
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>22/06</dataInicio>"
+        var dados = dados + "<dataFim>22/07</dataFim>"
+        var dados = dados + "<signoNome>Cancer</signoNome>"
+        var dados = dados + "<descricao>Câncer são amorosos.</descricao>"
+        var dados = dados + "</signo>"
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>23/07</dataInicio>"
+        var dados = dados + "<dataFim>22/08</dataFim>"
+        var dados = dados + "<signoNome>Leão</signoNome>"
+        var dados = dados + "<descricao>Leão é o centro do universo.</descricao>"
+        var dados = dados + "</signo>"
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>23/08</dataInicio>"
+        var dados = dados + "<dataFim>22/09</dataFim>"
+        var dados = dados + "<signoNome>Virgem</signoNome>"
+        var dados = dados + "<descricao>Virgem é imprevisível.</descricao>"
+        var dados = dados + "</signo>"
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>23/09</dataInicio>"
+        var dados = dados + "<dataFim>22/10</dataFim>"
+        var dados = dados + "<signoNome>Libra</signoNome>"
+        var dados = dados + "<descricao>Libra é ponderado.</descricao>"
+        var dados = dados + "</signo>"
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>23/10</dataInicio>"
+        var dados = dados + "<dataFim>21/11</dataFim>"
+        var dados = dados + "<signoNome>Escorpiao</signoNome>"
+        var dados = dados + "<descricao>Com Escorpião não há perdão.</descricao>"
+        var dados = dados + "</signo>"
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>22/11</dataInicio>"
+        var dados = dados + "<dataFim>21/12</dataFim>"
+        var dados = dados + "<signoNome>Sagitario</signoNome>"
+        var dados = dados + "<descricao>Com Sagitário é forte e determinado.</descricao>"
+        var dados = dados + "</signo>"
+
+
+        var dados = dados + "<signo>"
+        var dados = dados + "<dataInicio>22/12</dataInicio>"
+        var dados = dados + "<dataFim>19/01</dataFim>"
+        var dados = dados + "<signoNome>Capriconio</signoNome>"
+        var dados = dados + "<descricao>Pessoas dedicadas e compromissadas.</descricao>"
+        var dados = dados + "</signo>"
+        var dados = dados + "</signos>"
+
+        var aniversario = document.getElementById('aniversario').value;
+
+        if (window.DOMParser) {
+            parser = new DOMParser();
+            xmlDoc = parser.parseFromString(dados, "text/xml")
+        } else {
+            xmlDoc = new ActiveXObject("Microsoft.XMLDOM")
+            xmlDoc.async = false;
+            xmlDoc.loadXML(dados);
+        }
+
+        var signos = xmlDoc.getElementsByTagName("signos")[0];
+        var inicio = signos.getElementsByTagName("dataInicio");
+        var fim = signos.getElementsByTagName("dataFim");
+        var signoNome = signos.getElementsByTagName("signoNome");
+        var descricao = signos.getElementsByTagName("descricao");
+
+        for (var i in inicio) {
+            let stringInicio = inicio[i].firstChild.textContent + "/" + "2022"
+            let stringFim = fim[i].firstChild.textContent + "/" + "2022"
+            let stringSignoNome = signoNome[i].firstChild.textContent
+            let stringDescricao = descricao[i].firstChild.textContent
+
+            const [dayInicio, monthInicio, yearInicio] = stringInicio.split('/');
+            const [dayFim, monthFim, yearFim] = stringFim.split('/');
+
+            var dateInicio = new Date(yearInicio + "-" + monthInicio + "-" + dayInicio);
+            var dateFim = new Date(yearFim + "-" + monthFim + "-" + dayFim);
+            var dateAniversario = new Date(aniversario);
+
+            var monthAniversario = dateAniversario.getUTCMonth() + 1;
+            var dayAniversario = dateAniversario.getUTCDate();
+
+            if (dateAniversario > dateInicio && dateAniversario < dateFim) {
+                document.getElementById('signoValue').innerHTML = stringSignoNome;
+                document.getElementById('descricaoValue').innerHTML = stringDescricao;
+            }
+        }
+    }
+</script>
+
+</html>
